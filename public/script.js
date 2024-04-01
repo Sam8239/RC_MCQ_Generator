@@ -63,9 +63,9 @@ function updateStatisticsUI(statistics) {
 // Celebration Animation
 function showCelebration() {
     const celebrationElement = document.getElementById('celebration-animation');
-    celebrationElement.classList.remove('hidden');
+    celebrationElement.classList.remove('d-none');
     setTimeout(() => {
-        celebrationElement.classList.add('hidden');
+        celebrationElement.classList.add('d-none');
     }, 3000); // Adjust the time as needed
 }
 

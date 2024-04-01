@@ -17,23 +17,14 @@
         <div class="loader"></div>
     </div>
 
-    <header>
-        <h1 class="p-2 text-center bg-dark m-0">READING COMPREHENSION MCQ GENERATOR</h1>
+    <header class="bg-dark">
+        <h1 class="p-2 text-center m-0">READING COMPREHENSION MCQ GENERATOR</h1>
     </header>
 
-    <!-- Statistics -->
-    <div id="stats-container" class="text-center">
-        <span id="unattempted" class="rounded-pill p-2 bg-danger text-light">Unattempted: 0</span>
-        <span id="correct" class="rounded-pill p-2 bg-success text-light">Correct: 0</span>
-        <span id="attempted" class="rounded-pill p-2 bg-info">Attempted: 0</span>
-        <span id="total" class="rounded-pill p-2 bg-warning">Total: 0</span>
-    </div>
-
-    <div id="celebration-animation" class="hidden">
+    <div id="celebration-animation" class="d-none">
         <span>Well Done</span>
     </div>
-
-    <div class="fluid-container mx-5">
+    <div class="container-fluid ps-4">
         <div class="row">
             <!-- RC Section -->
             <section id="rc-section" class="my-2 col-xl-5 text-center left">
@@ -43,12 +34,12 @@
             </section>
 
             <!-- Vertical Line -->
-            <div class="d-none d-lg-flex" style="height: inherit; width:25px!important">
+            <div class="d-none d-lg-flex px-0 mx-2" style="height: inherit; width:1px!important">
                 <div class="vr"></div>
             </div>
 
             <!-- MCQ Section -->
-            <section id="mcq-section" class="my-2 col-xl text-center right">
+            <section id="mcq-section" class="my-2 col-xl text-center middle me-2">
                 <h2 class="mb-3 mt-2">MCQ'S</h2>
 
                 <!-- Loader -->
@@ -59,20 +50,28 @@
                 <ul id="mcq-list">
                 </ul>
             </section>
+
+            <!-- Side Panel -->
+            <div class="col-xl d-flex justify-content-center side-panel p-0">
+                <!-- Statistics -->
+                <div id="stats-container" class="text-center mt-3">
+                    <span id="unattempted" class="rounded-pill p-2 bg-danger text-light">Unattempted: 0</span>
+                    <span id="correct" class="rounded-pill p-2 bg-success text-light">Correct: 0</span>
+                    <span id="attempted" class="rounded-pill p-2 bg-primary text-light">Attempted: 0</span>
+                    <span id="total" class="rounded-pill p-2 bg-warning">Total: 0</span>
+                </div>
+            </div>
         </div>
     </div>
 
-    <footer class="fixed-bottom py-2 bg-dark">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div>
-                <a href="" class="text-light p-0">© Copyright 2024</a>
-            </div>
-
-            <div>
-                <a class="text-info p-0 " href="/privacy_policy">Privacy Policy</a>
-                <a class=" text-info p-0 ms-4" href="/terms_of_service">Terms of Service</a>
-            </div>
+    <footer class="fixed-bottom py-2 bg-dark text-center">
+        <div class="hstack gap-3 container">
+            <a href="" class="text-light p-0">© Copyright 2024</a>
+            <a class="text-info p-0 ms-auto" href="/privacy_policy">Privacy Policy</a>
+            <div class="vr bg-light"></div>
+            <a class=" text-info p-0" href="/terms_of_service">Terms of Service</a>
         </div>
+
     </footer>
 
     <script src="/script.js"></script>

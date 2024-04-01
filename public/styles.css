@@ -2,7 +2,7 @@ body::-webkit-scrollbar {
     width: 0;
 }
 
-.right::-webkit-scrollbar {
+.middle::-webkit-scrollbar {
     width: 0;
 }
 
@@ -29,7 +29,11 @@ body {
 }
 
 header h1 {
-    color: #ffc107;
+    /* color: #ffc107; */
+    background-image: url('/images/bg.jpeg');
+    background-clip: text;
+    color: transparent;
+    /* Hide text */
 }
 
 textarea {
@@ -57,27 +61,14 @@ textarea {
 /* Buttons Starts */
 button {
     padding: 0.5rem 1rem;
-    font-weight: 800;
+    font-weight: 700;
     border-radius: 50px !important;
-    border-width: 3px
+    border-width: 3px;
+    transition: transform 0.2s ease
 }
 
 button:hover {
-    animation: pulse 1.2s ease-in-out
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.1);
-    }
-
-    100% {
-        transform: scale(1);
-    }
+    transform: scale(1.1);
 }
 
 #generate-btn {
@@ -116,7 +107,7 @@ input {
 }
 
 .vr {
-    opacity: 1 !important;
+    opacity: 0.7 !important;
 }
 
 .questions {
@@ -127,6 +118,7 @@ input {
 
 .options {
     margin-left: 5px;
+    text-align: start !important;
 }
 
 /* Loader Starts */
@@ -179,30 +171,44 @@ input {
 }
 
 /* Loader Ends */
-
-
 .left {
-    /* position: sticky;
-    top: 0;
-    left: 0; */
     height: 83vh;
 }
 
-.right {
-    overflow-y: auto;
+.middle {
+    overflow: auto;
     height: 83vh;
+}
+
+.side-panel {
+    max-width: 175px !important;
+    min-height: 83vh;
+    background: radial-gradient(circle, rgba(34, 193, 195, 1) 0%, rgba(160, 253, 45, 1) 100%);
 }
 
 /* Statistics Starts */
 #stats-container {
     position: fixed;
-    bottom: 80px;
-    right: 20px;
-    background-color: rgba(5, 152, 238, 0.3);
+    background: radial-gradient(circle, red 50%, yellow 100%);
     border-radius: 20px;
     padding: 6px;
     box-shadow: -4px 5px 10px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(2px);
+    border: solid 3px transparent;
+    background-clip: border-box;
+    min-width: fit-content;
+    width: 10% !important;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        border-radius: inherit;
+        background: #000;
+    }
 }
 
 #stats-container span {
@@ -256,8 +262,5 @@ input {
     color: #fff;
 }
 
-.hidden {
-    display: none;
-}
 
 /* Celebration Animation Ends */
