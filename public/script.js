@@ -69,6 +69,37 @@ function showCelebration() {
     }, 3000); // Adjust the time as needed
 }
 
+
+// Timer Starts
+let timerInterval;
+let seconds = 0;
+let minutes = 0;
+
+// Start timer function
+function startTimer() {
+    timerInterval = setInterval(() => {
+        seconds++;
+        if (seconds === 60) {
+            seconds = 0;
+            minutes++;
+        }
+        updateTimerDisplay();
+    }, 1000);
+}
+
+// Stop timer function
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+// Update timer display function
+function updateTimerDisplay() {
+    const timerDisplay = document.getElementById('timer');
+    timerDisplay.textContent = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+}
+
+// Timer Ends
+
 // Functions Ends
 
 // Handles Generate MCQ's Button
@@ -179,6 +210,8 @@ document.getElementById('generate-btn').addEventListener('click', () => {
                             updateStatisticsUI(statistics)
                             if (correctAnswers === data.mcqs.questions.length) {
                                 showCelebration()
+                                stopTimer();
+                                playButton.disabled = false;
                             }
                         })
                         .catch(error => console.error('Error:', error));
@@ -195,3 +228,12 @@ document.getElementById('generate-btn').addEventListener('click', () => {
         alert('Please enter some text for the reading comprehension.');
     }
 });
+
+
+// Handle Play button
+const playButton = document.getElementById('play-button');
+playButton.addEventListener('click', () => {
+    startTimer();
+    playButton.disabled = true; // Disable the button after clicking
+});
+

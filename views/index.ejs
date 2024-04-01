@@ -53,8 +53,18 @@
 
             <!-- Side Panel -->
             <div class="col-xl d-flex justify-content-center side-panel p-0">
+
+                <!-- Timer -->
+
+                <div id="timer-container" class="text-center mt-3 bg-dark position-fixed">
+                    <span id="timer" class="text-light">00:00</span>
+                    <!-- Play Button -->
+                    <button id="play-button" class="btn btn-primary">Play</button>
+                </div>
+
                 <!-- Statistics -->
-                <div id="stats-container" class="text-center mt-3">
+
+                <div id="stats-container" class="text-center">
                     <span id="unattempted" class="rounded-pill p-2 bg-danger text-light">Unattempted: 0</span>
                     <span id="correct" class="rounded-pill p-2 bg-success text-light">Correct: 0</span>
                     <span id="attempted" class="rounded-pill p-2 bg-primary text-light">Attempted: 0</span>
