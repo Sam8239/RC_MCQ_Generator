@@ -1,0 +1,263 @@
+body::-webkit-scrollbar {
+    width: 0;
+}
+
+.right::-webkit-scrollbar {
+    width: 0;
+}
+
+textarea::-webkit-scrollbar {
+    display: none;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+a:hover {
+    opacity: 0.9;
+}
+
+ul {
+    padding: 0 !important;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header h1 {
+    color: #ffc107;
+}
+
+textarea {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 1rem;
+    padding: 20px;
+    text-align: justify !important
+}
+
+#mcq-list {
+    list-style-type: none;
+    margin-bottom: 1.2rem;
+}
+
+#mcq-list li {
+    margin-bottom: 1.2rem;
+}
+
+#mcq-list li div div {
+    display: flex;
+    align-items: center;
+}
+
+/* Buttons Starts */
+button {
+    padding: 0.5rem 1rem;
+    font-weight: 800;
+    border-radius: 50px !important;
+    border-width: 3px
+}
+
+button:hover {
+    animation: pulse 1.2s ease-in-out
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+#generate-btn {
+    background-color: #333;
+    color: #fff;
+    font-size: large;
+    border-color: red;
+}
+
+#reset-btn {
+    background-color: red;
+    color: #fff;
+    font-size: medium;
+}
+
+#submit-btn {
+    background-color: #00ff00;
+    color: #000;
+    font-size: medium;
+    margin-left: 40px;
+}
+
+/* Buttons Ends */
+
+label {
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+input {
+    margin-right: 0.5rem !important;
+    top: 1px;
+    position: relative;
+}
+
+.vr {
+    opacity: 1 !important;
+}
+
+.questions {
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    text-align: justify !important;
+}
+
+.options {
+    margin-left: 5px;
+}
+
+/* Loader Starts */
+.loader-div {
+    background: #000;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 1031;
+}
+
+.data-loader-div {
+    height: 50vh;
+}
+
+.loader {
+    width: 50px;
+    aspect-ratio: 1;
+    display: grid;
+    mask: conic-gradient(from 15deg, #0000, #000);
+    -webkit-mask: conic-gradient(from 15deg, #0000, #000);
+    animation: l26 1s infinite steps(12);
+}
+
+.loader,
+.loader:before,
+.loader:after {
+    background:
+        radial-gradient(closest-side at 50% 12.5%,
+            #f03355 96%, #0000) 50% 0/20% 80% repeat-y,
+        radial-gradient(closest-side at 12.5% 50%,
+            #f03355 96%, #0000) 0 50%/80% 20% repeat-x;
+}
+
+.loader:before,
+.loader:after {
+    content: "";
+    grid-area: 1/1;
+    transform: rotate(30deg);
+}
+
+.loader:after {
+    transform: rotate(60deg);
+}
+
+@keyframes l26 {
+    100% {
+        transform: rotate(1turn)
+    }
+}
+
+/* Loader Ends */
+
+
+.left {
+    /* position: sticky;
+    top: 0;
+    left: 0; */
+    height: 83vh;
+}
+
+.right {
+    overflow-y: auto;
+    height: 83vh;
+}
+
+/* Statistics Starts */
+#stats-container {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background-color: white;
+    /* background-color: rgba(35, 216, 162, 0.9); */
+    border-radius: 20px;
+    padding: 6px;
+    box-shadow: -4px 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+#stats-container span {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#stats-container span:last-child {
+    margin-bottom: 0;
+}
+
+/* Statistics Endss */
+
+
+/* Celebration Animation Starts */
+#celebration-animation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(92, 159, 38, 0.9);
+    border-radius: 50px;
+    padding: 15px;
+    animation: celebration 2s ease-out forwards;
+    z-index: 1;
+
+}
+
+@keyframes celebration {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+#celebration-animation span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Celebration Animation Ends */
