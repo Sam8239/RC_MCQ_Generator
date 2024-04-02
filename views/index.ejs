@@ -68,20 +68,22 @@
 
                 <!-- Timer -->
 
-                <div id="timer-container" class="text-center mt-4 position-absolute px-3 py-2 flex-column d-flex"
+                <div id="timer-container" class="text-center mt-3 position-absolute px-3 py-2 flex-column d-flex"
                     style="border-radius: 40px;">
                     <span id="timer" class="text-light fs-1 fw-semibold">00:00</span>
                     <!-- Play Button -->
-                    <button disabled id="start-button" class="btn btn-info px-3 py-0 fs-4 fw-bold mb-2">Start</button>
+                    <button disabled id="start-button"
+                        class="btn btn-info px-3 py-0 fs-4 fw-bold mb-2 text-light">Start</button>
                 </div>
 
                 <!-- Statistics -->
-
-                <div id="stats-container" class="text-center">
-                    <span id="unattempted" class="rounded-pill p-2 bg-danger text-light">Unattempted: 0</span>
-                    <span id="correct" class="rounded-pill p-2 bg-success text-light">Correct: 0</span>
-                    <span id="attempted" class="rounded-pill p-2 bg-primary text-light">Attempted: 0</span>
-                    <span id="total" class="rounded-pill p-2 bg-warning">Total: 0</span>
+                <div class="stats">
+                    <div id="stats-container" class="text-center p-2">
+                        <span id="unattempted" class="rounded-pill p-2 bg-danger text-light">Unattempted: 0</span>
+                        <span id="correct" class="rounded-pill p-2 bg-success text-light">Correct: 0</span>
+                        <span id="attempted" class="rounded-pill p-2 bg-primary text-light">Attempted: 0</span>
+                        <span id="total" class="rounded-pill p-2 bg-warning">Total: 0</span>
+                    </div>
                 </div>
             </div>
         </div>
