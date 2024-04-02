@@ -1,7 +1,8 @@
-const express = require('express');
-require('dotenv').config();
-const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = require("@google/generative-ai");
-const path = require('path');
+import express from 'express';
+import dotenv from 'dotenv';
+import path from 'path';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;

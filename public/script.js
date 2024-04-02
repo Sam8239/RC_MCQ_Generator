@@ -230,10 +230,10 @@ document.getElementById('generate-btn').addEventListener('click', () => {
 });
 
 
-// Handle Play button
-const playButton = document.getElementById('play-button');
+// Handle Start button
+const startButton = document.getElementById('start-button');
 playButton.addEventListener('click', () => {
     startTimer();
-    playButton.disabled = true; // Disable the button after clicking
+    startButton.disabled = true; // Disable the button after clicking
 });
 
