@@ -1,6 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
+import { PromptTemplate } from "@langchain/core/prompts";
+import { StringOutputParser } from "@langchain/core/output_parsers";
 
 dotenv.config();
 
@@ -11,23 +14,18 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.json());
 
-// Gemini API Configuration
-const geminiAPIKey = process.env.API_KEY; // Replace with your Gemini API key
-const genAI = new GoogleGenerativeAI(geminiAPIKey);
-const MODEL_NAME = "gemini-1.0-pro";
-
 // Routes
 app.get('/', (req, res) => {
     res.render('index');
 });
 
-let generatedMCQs = {}; // Define a variable to store generated MCQs and correct answers
+let generatedMCQs = {};
 
 app.post('/generate-mcq', async (req, res) => {
     const rcText = req.body.rcText;
     try {
         // Generate MCQs along with correct answers
-        generatedMCQs = await generateMCQs(rcText);
+        generatedMCQs = await generateMCQs(rcText, 6);
         res.json({ mcqs: generatedMCQs.mcqs }); // Return only the MCQs to the client
     } catch (error) {
         console.error('Error generating MCQs:', error);
@@ -61,46 +59,23 @@ app.get('/terms_of_service', (req, res) => {
 
 //Functions
 // Generate MCQS using Gemini API
-async function generateMCQs(rcText) {
-    const model = genAI.getGenerativeModel({ model: MODEL_NAME });
-
-    const generationConfig = {
-        temperature: 0,
-        topK: 1,
-        topP: 1,
-        maxOutputTokens: 2048,
-    };
-
-    const safetySettings = [
-        {
-            category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-            category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-            category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-            category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-    ];
-
-    const parts = [
-        { text: `${rcText} This is a reading comprehension passage, based on this create cat exam-level multiple-choice questions with options. Following the MCQs, also provide the answers separately with correct options with full option, ensuring that the answers are not directly provided after each question. Also Each question should have only one correct answer` },
-    ];
-
-    const result = await model.generateContent({
-        contents: [{ role: "user", parts }],
-        generationConfig,
-        safetySettings,
+async function generateMCQs(rcText, no_of_questions) {
+    const chatModel = new ChatGoogleGenerativeAI({
+        modelName: "gemini-1.0-pro",
+        temperature: 0
     });
 
-    const response = result.response.text();
+    const outputParser = new StringOutputParser();
+
+    const prompt = PromptTemplate.fromTemplate(
+        "{rcText} This is a reading comprehension passage, based on this create {no_of_questions} cat exam-level multiple-choice questions with options. Following the MCQs, also provide the answers separately with correct options with full option, ensuring that the answers are not directly provided after each question. Also Each question should have only one correct answer"
+    );
+
+    const chain = prompt.pipe(chatModel).pipe(outputParser);
+    const response = await chain.invoke({
+        rcText: rcText,
+        no_of_questions: "4"
+    });
     const mcqs = extractMCQs(response)
     return mcqs
 }
