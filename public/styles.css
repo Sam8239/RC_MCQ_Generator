@@ -189,7 +189,7 @@ input {
 /* Statistics Starts */
 #stats-container {
     position: fixed;
-    margin-top: 200px;
+    margin-top: 180px;
     background: radial-gradient(circle, red 50%, yellow 100%);
     border-radius: 20px;
     padding: 6px;
@@ -224,7 +224,7 @@ input {
     margin-bottom: 0;
 }
 
-/* Statistics Endss */
+/* Statistics Ends */
 
 
 /* Celebration Animation Starts */
