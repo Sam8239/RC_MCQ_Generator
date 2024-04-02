@@ -105,6 +105,7 @@ function updateTimerDisplay() {
 // Handles Generate MCQ's Button
 document.getElementById('generate-btn').addEventListener('click', () => {
     const rcText = document.getElementById('rc-text').value.trim();
+    const no_of_questions = document.getElementById('numQuestions').value;
     data_loader.style.display = "flex";
     data_loader.style.setProperty("display", "flex", "important");
     const mcqList = document.getElementById('mcq-list');
@@ -117,7 +118,7 @@ document.getElementById('generate-btn').addEventListener('click', () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ rcText })
+            body: JSON.stringify({ rcText, no_of_questions})
         })
             .then(response => response.json())
             .then(data => {
@@ -160,6 +161,7 @@ document.getElementById('generate-btn').addEventListener('click', () => {
                     mcqList.appendChild(mcqItem);
                 });
 
+                startButton.disabled = false;
 
                 // Reset Button
                 const resetBtn = document.createElement('button');
@@ -232,8 +234,19 @@ document.getElementById('generate-btn').addEventListener('click', () => {
 
 // Handle Start button
 const startButton = document.getElementById('start-button');
-playButton.addEventListener('click', () => {
+startButton.addEventListener('click', () => {
     startTimer();
     startButton.disabled = true; // Disable the button after clicking
 });
 
+// Number of Questions Slider 
+const numQuestionsSlider = document.getElementById('numQuestions');
+const selectedValue = document.getElementById('selectedValue');
+
+// Display initial value
+selectedValue.textContent = numQuestionsSlider.value;
+
+// Update value when slider is changed
+numQuestionsSlider.addEventListener('input', function () {
+    selectedValue.textContent = this.value;
+});

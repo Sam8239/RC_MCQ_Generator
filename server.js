@@ -23,9 +23,11 @@ let generatedMCQs = {};
 
 app.post('/generate-mcq', async (req, res) => {
     const rcText = req.body.rcText;
+    const no_of_questions = req.body.no_of_questions;
+
     try {
         // Generate MCQs along with correct answers
-        generatedMCQs = await generateMCQs(rcText, 6);
+        generatedMCQs = await generateMCQs(rcText, no_of_questions);
         res.json({ mcqs: generatedMCQs.mcqs }); // Return only the MCQs to the client
     } catch (error) {
         console.error('Error generating MCQs:', error);
@@ -74,7 +76,7 @@ async function generateMCQs(rcText, no_of_questions) {
     const chain = prompt.pipe(chatModel).pipe(outputParser);
     const response = await chain.invoke({
         rcText: rcText,
-        no_of_questions: "4"
+        no_of_questions: no_of_questions
     });
     const mcqs = extractMCQs(response)
     return mcqs

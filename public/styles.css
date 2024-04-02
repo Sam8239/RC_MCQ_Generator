@@ -37,7 +37,7 @@ header h1 {
 
 textarea {
     width: 100%;
-    height: 400px;
+    height: 360px;
     margin-bottom: 1rem;
     padding: 20px;
     text-align: justify !important
@@ -72,7 +72,6 @@ button:hover {
 }
 
 #generate-btn {
-    background-color: #333;
     color: #fff;
     font-size: large;
     border-color: red;
@@ -173,6 +172,7 @@ input {
 /* Loader Ends */
 .left {
     height: 83vh;
+    min-height: 83vh;
 }
 
 .middle {
@@ -271,4 +271,8 @@ input {
     letter-spacing: 4px;
     backdrop-filter: blur(100px);
     background-color: rgba(20, 5, 5, 0.25);
+}
+
+.slider-container {
+    letter-spacing: normal;
 }
