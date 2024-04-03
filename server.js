@@ -70,7 +70,7 @@ async function generateMCQs(rcText, no_of_questions) {
     const outputParser = new StringOutputParser();
 
     const prompt = PromptTemplate.fromTemplate(
-        "{rcText} This is a reading comprehension passage, based on this create {no_of_questions} cat exam-level multiple-choice questions with options. Following the MCQs, also provide the answers separately with correct options with full option, ensuring that the answers are not directly provided after each question. Also Each question should have only one correct answer"
+        "{rcText} This is a reading comprehension passage, based on this create {no_of_questions} cat exam-level multiple-choice questions with options. Following the MCQs, also provide the answers separately with correct options with full text option, ensuring that the answers are not directly provided after each question. Also Each question should have only one correct answer"
     );
 
     const chain = prompt.pipe(chatModel).pipe(outputParser);

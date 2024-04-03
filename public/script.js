@@ -53,11 +53,11 @@ function calculateStatistics(mcqs, submittedAnswers, correctAnswers) {
 }
 
 // Update the UI with the calculated statistics
-function updateStatisticsUI(statistics) {
-    document.getElementById('unattempted').textContent = `Unattempted: ${statistics.unattemptedQuestions}`;
-    document.getElementById('correct').textContent = `Correct: ${statistics.correctAnswers}`;
-    document.getElementById('attempted').textContent = `Attempted: ${statistics.attemptedQuestions}`;
-    document.getElementById('total').textContent = `Total: ${statistics.totalQuestions}`;
+function updateStatisticsUI({ unattemptedQuestions = 0, correctAnswers = 0, attemptedQuestions = 0, totalQuestions = 0 } = {}) {
+    document.getElementById('unattempted').textContent = `Unattempted: ${unattemptedQuestions}`;
+    document.getElementById('correct').textContent = `Correct: ${correctAnswers}`;
+    document.getElementById('attempted').textContent = `Attempted: ${attemptedQuestions}`;
+    document.getElementById('total').textContent = `Total: ${totalQuestions}`;
 }
 
 // Celebration Animation
@@ -74,6 +74,7 @@ function showCelebration() {
 let timerInterval;
 let seconds = 0;
 let minutes = 0;
+const timerElement = document.getElementById('timer');
 
 // Start timer function
 function startTimer() {
@@ -83,7 +84,7 @@ function startTimer() {
             seconds = 0;
             minutes++;
         }
-        updateTimerDisplay();
+        updateTimerElement();
     }, 1000);
 }
 
@@ -93,12 +94,22 @@ function stopTimer() {
 }
 
 // Update timer display function
-function updateTimerDisplay() {
-    const timerDisplay = document.getElementById('timer');
-    timerDisplay.textContent = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+function updateTimerElement() {
+    timerElement.textContent = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
 }
 
 // Timer Ends
+
+// Function to reset stats and timer
+const resetStatsAndTimer = () => {
+    // Reset timer to 00:00
+    timerElement.textContent = '00:00';
+
+    // Reset stats except for the total
+    document.getElementById('unattempted').textContent = "Unattempted: 0";
+    document.getElementById('correct').textContent = "Correct: 0";
+    document.getElementById('attempted').textContent = "Attempted: 0";
+};
 
 // Functions Ends
 
@@ -118,7 +129,7 @@ document.getElementById('generate-btn').addEventListener('click', () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ rcText, no_of_questions})
+            body: JSON.stringify({ rcText, no_of_questions })
         })
             .then(response => response.json())
             .then(data => {
@@ -163,6 +174,8 @@ document.getElementById('generate-btn').addEventListener('click', () => {
 
                 startButton.disabled = false;
 
+                updateStatisticsUI({ totalQuestions: data.mcqs.questions.length })
+
                 // Reset Button
                 const resetBtn = document.createElement('button');
                 resetBtn.textContent = 'Reset';
@@ -177,6 +190,7 @@ document.getElementById('generate-btn').addEventListener('click', () => {
                     });
 
                     reset_bg_color(mcqList)
+                    resetStatsAndTimer()
                 })
 
                 mcqList.appendChild(resetBtn);
@@ -210,10 +224,12 @@ document.getElementById('generate-btn').addEventListener('click', () => {
                             const correctAnswers = handleValidationResult(result);
                             const statistics = calculateStatistics(data.mcqs, selectedAnswers, correctAnswers)
                             updateStatisticsUI(statistics)
+
+                            // If all the answers are correct
                             if (correctAnswers === data.mcqs.questions.length) {
                                 showCelebration()
                                 stopTimer();
-                                playButton.disabled = false;
+                                startButton.disabled = false;
                             }
                         })
                         .catch(error => console.error('Error:', error));
