@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js",
-    "build": "webpack --config webpack.config.cjs"
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -17,10 +16,6 @@
     "dotenv": "^16.4.5",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
-    "fs": "^0.0.1-security",
-    "met": "^0.0.3",
-    "nodemon": "^3.1.0",
-    "webpack": "^5.91.0",
-    "webpack-cli": "^5.1.4"
+    "nodemon": "^3.1.0"
   }
 }
